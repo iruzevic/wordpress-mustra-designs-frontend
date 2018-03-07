@@ -3,7 +3,7 @@
   <ul>
     <li v-for="value in menu.items" :key="value.position">
       <a v-bind:href="value.url" v-if="value.type === 'custom'" target="_blank">{{value.title}}</a>
-      <router-link v-else :to="{path: value.url, parms: {url: value.slug}}">{{value.title}}</router-link>
+      <router-link v-else :to="value.url">{{value.title}}</router-link>
     </li>
   </ul>
 </div>

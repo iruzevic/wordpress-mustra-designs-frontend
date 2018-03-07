@@ -22,6 +22,7 @@ export default new Router({
       path: '/:type/:slug',
       name: 'Blog',
       component: Nested,
+      props: true
     }
   ]
 })

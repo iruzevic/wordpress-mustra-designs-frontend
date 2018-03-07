@@ -23,7 +23,6 @@ export default {
       page: {},
       slug: this.$route.params.slug,
       type: 'page',
-      url: this.$route.params.url
     }
   },
 
