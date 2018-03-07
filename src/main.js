@@ -8,6 +8,8 @@ Vue.config.productionTip = false
 
 import Navigation from './components/shared/Navigation.vue';
 import SectionCreator from './components/sections/SectionCreator.vue';
+import BlogItem from './components/BlogItem.vue';
+import PageDefault from './components/PageDefault.vue';
 
 import BlogSection from './components/sections/section/BlogSection.vue';
 import ContentSection from './components/sections/section/ContentSection.vue';
@@ -20,6 +22,8 @@ import TimelineSection from './components/sections/section/TimelineSection.vue';
 // Shared
 Vue.component('Navigation', Navigation);
 Vue.component('SectionCreator', SectionCreator);
+Vue.component('BlogItem', BlogItem);
+Vue.component('PageDefault', PageDefault);
 
 Vue.component('BlogSection', BlogSection);
 Vue.component('ContentSection', ContentSection);

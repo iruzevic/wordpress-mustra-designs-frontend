@@ -1,6 +1,7 @@
 <template>
 <div>
-  <div v-for="section in page.sections" :key="section.acf_fc_layout">
+  Section Creator
+  <div v-for="section in page.sections" :key="section.acf_fc_id">
 
     <div v-if="section.acf_fc_layout === 'blog_section'">
       <blog-section :section="section"></blog-section>

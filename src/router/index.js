@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Page from '@/components/Page'
+import Nested from '@/components/Nested'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -10,12 +11,17 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Page
+      component: Page,
     },
     {
       path: '/:slug',
       name: 'Page',
-      component: Page
+      component: Page,
+    },
+    {
+      path: '/:type/:slug',
+      name: 'Blog',
+      component: Nested,
     }
   ]
 })
