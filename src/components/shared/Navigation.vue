@@ -2,12 +2,14 @@
 <div>
   <ul>
     <li v-for="value in menu.items" :key="value.position">
-      <router-link :to="value.url">{{value.title}}</router-link>
+      <a v-bind:href="value.url" v-if="value.type === 'custom'" target="_blank">{{value.title}}</a>
+      <router-link v-else :to="value.url">{{value.title}}</router-link>
     </li>
   </ul>
 </div>
 
 </template>
+
 <script>
 
 import {getMenuService} from '@/services/menu';
