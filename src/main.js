@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-import themeOptions from './mixins/theme-options';
+import store from './store';
 
 Vue.config.productionTip = false
 
@@ -34,13 +34,11 @@ Vue.component('InfoBoxesSection', InfoBoxesSection);
 Vue.component('ProjectsSection', ProjectsSection);
 Vue.component('TimelineSection', TimelineSection);
 
-themeOptions.fetchThemeOptions();
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  themeOptions,
+  store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 })

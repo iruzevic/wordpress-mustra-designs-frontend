@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-    <navigation :position="navigationPosition" />
+    <!-- <navigation :position="navigationPosition" /> -->
     <router-view/>
   </div>
 </template>
 
 <script>
-import themeOptions from './mixins/theme-options';
 export default {
   name: 'App',
   data() {
@@ -14,14 +13,5 @@ export default {
       navigationPosition: 'header',
     };
   },
-  created() {
-    
-    this.test()
-  },
-  methods: {
-   async test() {
-      console.log(themeOptions.options);  
-    }
-  }
 }
 </script>

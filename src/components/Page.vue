@@ -23,6 +23,7 @@ export default {
       page: {},
       slug: this.$route.params.slug,
       type: 'page',
+      options: {}
     }
   },
 
@@ -35,16 +36,22 @@ export default {
 
 
   created() {
-    this.getPageDetails();
+    this.$store.dispatch('getAllPokemon');
+    // this.getPageDetails();
+    // this.test()
   },
 
-  methods: {
-    getPageDetails() {
-      getPageService(this.slug, this.type).then((response) => {
-        this.page = response.data;
-        document.title = this.page.post_title;
-      });
-    },
-  },
+  // methods: {
+  //   getPageDetails() {
+  //     console.log(this.options);
+  //     if(typeof this.slug === 'undefined') {
+  //       this.slug = 'welcome';
+  //     }
+  //     getPageService(this.slug, this.type).then((response) => {
+  //       this.page = response.data;
+  //       document.title = this.page.post_title;
+  //     });
+  //   },
+  // },
 }
 </script>
