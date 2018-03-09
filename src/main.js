@@ -3,27 +3,37 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-import store from './store';
+import store from './store/store';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.config.debug = true;
+Vue.config.devTools = true;
 
+// Components.
+import DataTypeController from './components/DataTypeController.vue';
+
+// Shared.
 import Navigation from './components/shared/Navigation.vue';
-import SectionCreator from './components/sections/SectionCreator.vue';
-import BlogItem from './components/BlogItem.vue';
-import PageDefault from './components/PageDefault.vue';
 
-import BlogSection from './components/sections/section/BlogSection.vue';
-import ContentSection from './components/sections/section/ContentSection.vue';
-import HeroSection from './components/sections/section/HeroSection.vue';
-import ImageTextSection from './components/sections/section/ImageTextSection.vue';
-import InfoBoxesSection from './components/sections/section/InfoBoxesSection.vue';
-import ProjectsSection from './components/sections/section/ProjectsSection.vue';
-import TimelineSection from './components/sections/section/TimelineSection.vue';
+// Data Type.
+import SectionCreator from './components/data-type/SectionCreator.vue';
+import PostItem from './components/data-type/PostItem.vue';
+import PageDefault from './components/data-type/PageDefault.vue';
+
+// Sections
+import BlogSection from './components/sections/BlogSection.vue';
+import ContentSection from './components/sections/ContentSection.vue';
+import HeroSection from './components/sections/HeroSection.vue';
+import ImageTextSection from './components/sections/ImageTextSection.vue';
+import InfoBoxesSection from './components/sections/InfoBoxesSection.vue';
+import ProjectsSection from './components/sections/ProjectsSection.vue';
+import TimelineSection from './components/sections/TimelineSection.vue';
 
 // Shared
 Vue.component('Navigation', Navigation);
+Vue.component('DataTypeController', DataTypeController);
 Vue.component('SectionCreator', SectionCreator);
-Vue.component('BlogItem', BlogItem);
+Vue.component('PostItem', PostItem);
 Vue.component('PageDefault', PageDefault);
 
 Vue.component('BlogSection', BlogSection);
@@ -37,8 +47,8 @@ Vue.component('TimelineSection', TimelineSection);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
   store,
+  router,
   components: { App },
   template: '<App/>',
 })

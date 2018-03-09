@@ -1,7 +1,7 @@
 
 <template>
 <div>
-  Page Default
+  PageDefault
   {{page}}
 </div>
 </template>

@@ -13,7 +13,9 @@
 <script>
 
 import {getMenuService} from '@/services/menu';
-
+import FETCH_STATUS from '@/enums/fetchStatus';
+import { mapGetters } from 'vuex'
+import { getMenuItems } from '@/store/getters'
 
 export default {
   name: 'Navigation',
@@ -25,19 +27,27 @@ export default {
       menu: {},
     }
   },
+  computed: {
+    ...mapGetters([
+      'getThemeOptions',
+      'getMenuItems',
+      'getMenu',
+      'menuFetchStatus',
+    ])
+  },
 
   created() {
+    this.$store.dispatch("fetchMenu");
     this.getMenuDetails();
   },
 
   methods: {
-    getMenuDetails() {
-      getMenuService().then((response) => {
-        response.data.map((value, index) => {
-          if(value['position'] === this.position) {
-            this.menu = value;
-          }
-        });
+     getMenuDetails() {
+       console.log(this.$store.state, this.getMenu, 'nav');
+       this.$store.state.menu.map((value, index) => {
+        if(value['position'] === this.position) {
+          this.menu = value;
+        }
       });
     },
   },

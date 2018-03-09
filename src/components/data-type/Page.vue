@@ -1,48 +1,48 @@
 <template>
 <div>
-  <div v-if="page.template === 'section-creator'">
-    <section-creator :page="page"></section-creator>
-  </div>
-  <div v-if="page.template === 'default'">
-    <page-default :page="page"></page-default>
-  </div>
-  <div v-if="type === 'post'">
-    <blog-item :post="page"></blog-item>
-  </div>
+  <data-type-controller :data="page" :type="type"></data-type-controller>
 </div>
 </template>
 
 <script>
 
 import {getPageService} from '@/services/page';
+import store from '@/store/store';
 
 export default {
-  name: 'Nested',
+  name: 'Page',
   data() {
     return {
       page: {},
       slug: this.$route.params.slug,
-      type: this.$route.params.type,
+      type: 'page',
+      themeOptions: {}
     }
   },
 
   beforeRouteUpdate (to, from, next) {
     this.slug = to.params.slug;
-    this.type = to.params.type;
 
     this.getPageDetails();
     next();
   },
 
+
   created() {
+    this.$store.dispatch("fetchThemeOptions").then(() => {
+      this.themeOptions = this.$store.state.themeOptions;
+    })
+
     this.getPageDetails();
   },
 
   methods: {
     getPageDetails() {
-      if(this.type === 'blog') {
-        this.type = 'post';
+      if(typeof this.slug === 'undefined') {
+        this.slug = this.themeOptions.home_page_url;
       }
+
+      console.log(this.slug)
 
       getPageService(this.slug, this.type).then((response) => {
         this.page = response.data;

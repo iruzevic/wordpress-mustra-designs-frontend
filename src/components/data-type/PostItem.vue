@@ -1,7 +1,7 @@
 
 <template>
 <div>
-  Blog Item
+  PostItem
   {{post}}
 </div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  name: 'BlogItem',
+  name: 'PostItem',
   props: {
     post: Object
   },
