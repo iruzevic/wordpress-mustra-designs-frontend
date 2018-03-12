@@ -6,7 +6,8 @@
 
 <script>
 
-import store from '@/store/store';
+import { mapGetters } from 'vuex'
+import { getMenuItems, getCurrentPage } from '@/store/getters'
 
 export default {
   name: 'Home',
@@ -18,20 +19,39 @@ export default {
     }
   },
 
-  created() {
+  computed: {
+    ...mapGetters([
+      'getMenuItems',
+      'getCurrentPage',
+    ]),
+
+    storeMenuItems: function() {
+      return this.getMenuItems;
+    },
+  },
+
+  beforeRouteUpdate (to, from, next) {
+    this.slug = to.params.slug;
+
+    console.log('Home');
+
     this.getPageDetails();
+    next();
   },
 
   methods: {
     async getPageDetails() {
-      await this.$store.dispatch("fetchThemeOptions").then(() => {
-        this.slug = this.$store.state.themeOptions.home_page_url;
+
+      this.getMenuItems.map((value, index) => {
+        if(value.url === '/') {
+          this.slug = value.slug;
+        }
       });
 
-      await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type}).then(() => {
-        this.page = this.$store.state.page;
-        document.title = this.page.post_title;
-      });
+      await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
+
+      this.page = this.getCurrentPage(this.slug);
+      document.title = this.page.post_title;
     },
   },
 }

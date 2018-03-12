@@ -18,23 +18,21 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getThemeOptions',
+      // 'getThemeOptions',
       'getMenu',
     ])
   },
   created() {
-    this.setInitThemeOptions();
+    // this.setInitThemeOptions();
     this.setInitMenus();
   },
   methods: {
-    setInitThemeOptions() {
-      this.$store.dispatch("fetchThemeOptions");
-    },
+    // async setInitThemeOptions() {
+    //   await this.$store.dispatch("fetchThemeOptions");
+    // },
 
     async setInitMenus() {
-      console.log('app');
        await this.$store.dispatch("fetchMenu");
-      // this.$store.dispatch("fetchMenuItems");
     }
   }
 }

@@ -7,15 +7,12 @@
     </li>
   </ul>
 </div>
-
 </template>
 
 <script>
 
-import {getMenuService} from '@/services/menu';
-import FETCH_STATUS from '@/enums/fetchStatus';
 import { mapGetters } from 'vuex'
-import { getMenuItems } from '@/store/getters'
+import { getMenu } from '@/store/getters'
 
 export default {
   name: 'Navigation',
@@ -29,22 +26,23 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getThemeOptions',
-      'getMenuItems',
       'getMenu',
-      'menuFetchStatus',
-    ])
+    ]),
+
+    storeMenu: function() {
+      return this.getMenu;
+    }
   },
 
-  created() {
-    this.$store.dispatch("fetchMenu");
-    this.getMenuDetails();
+  watch: {
+    storeMenu() {
+      this.getMenuDetails()
+    }
   },
 
   methods: {
-     getMenuDetails() {
-       console.log(this.$store.state, this.getMenu, 'nav');
-       this.$store.state.menu.map((value, index) => {
+    getMenuDetails() {
+      this.storeMenu.map((value, index) => {
         if(value['position'] === this.position) {
           this.menu = value;
         }

@@ -6,11 +6,8 @@
 
 <script>
 
-import { getMenuItems } from '@/store/getters'
 import { mapGetters } from 'vuex'
-import FETCH_STATUS from '@/enums/fetchStatus';
-// import * as types from './mutation-types';
-
+import { getMenuItems, getCurrentPage } from '@/store/getters'
 
 export default {
   name: 'Nested',
@@ -18,47 +15,48 @@ export default {
     return {
       page: {},
       slug: this.$route.params.slug,
-      type: this.$route.params.type,
+      type: '',
     }
   },
   computed: {
     ...mapGetters([
-      'getThemeOptions',
       'getMenuItems',
-      'getMenu',
-      'menuFetchStatus',
-    ])
+      'getCurrentPage',
+    ]),
+
+    storeMenuItems: function() {
+      return this.getMenuItems;
+    },
+  },
+
+  watch: {
+    storeMenuItems() {
+      this.getPageDetails();
+    },
   },
 
   beforeRouteUpdate (to, from, next) {
     this.slug = to.params.slug;
-    this.type = to.params.type;
+
+    console.log('Nested');
 
     this.getPageDetails();
     next();
   },
 
-  created() {
-    this.getPageDetails();
-  },
-
   methods: {
     async getPageDetails() {
 
-      // await this.$store.dispatch("fetchMenu");
+      this.getMenuItems.map((value, index) => {
+        if(value.slug === this.slug) {
+          this.type = value.type;
+        }
+      });
 
-      console.log(this.$store.state, 'nested');
+      await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
 
-      // this.getMenuItems.map((value, index) => {
-      //   if(value.slug === this.slug) {
-      //     this.type = value.type;
-      //   }
-      // });
-
-      // await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type}).then(() => {
-      //   this.page = this.$store.state.page;
-      //   document.title = this.page.post_title;
-      // });
+      this.page = this.getCurrentPage(this.slug);
+      document.title = this.page.post_title;
     },
   },
 }

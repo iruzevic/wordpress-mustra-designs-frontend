@@ -1,19 +1,18 @@
-const getMenuItems = (state) => {
-  return state.menuItems;
+const getCurrentPage = (state) => (slug) => {
+  return state.pages[slug];
 };
 
 const getMenu = (state) => {
   return state.menu;
 };
 
-const getThemeOptions = (state) => {
-  return state.themeOptions;
+const getMenuItems = (state) => {
+  return state.menuItems;
 };
 
-const menuFetchStatus = (state) => {
-  console.log( state.menuFetchStatus, 'ggetter');
-  return state.menuFetchStatus;
-};
+// const getThemeOptions = (state) => {
+//   return state.themeOptions;
+// };
 
 
-export { getMenuItems, getMenu, getThemeOptions, menuFetchStatus };
+export { getMenu, getMenuItems, getCurrentPage };

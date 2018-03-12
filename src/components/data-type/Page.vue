@@ -6,8 +6,8 @@
 
 <script>
 
-import {getPageService} from '@/services/page';
-import store from '@/store/store';
+import { mapGetters } from 'vuex'
+import { getCurrentPage } from '@/store/getters'
 
 export default {
   name: 'Page',
@@ -16,38 +16,30 @@ export default {
       page: {},
       slug: this.$route.params.slug,
       type: 'page',
-      themeOptions: {}
     }
+  },
+
+  computed: {
+    ...mapGetters([
+      'getCurrentPage',
+    ]),
   },
 
   beforeRouteUpdate (to, from, next) {
     this.slug = to.params.slug;
 
+    console.log('Page');
+
     this.getPageDetails();
     next();
   },
 
-
-  created() {
-    this.$store.dispatch("fetchThemeOptions").then(() => {
-      this.themeOptions = this.$store.state.themeOptions;
-    })
-
-    this.getPageDetails();
-  },
-
   methods: {
-    getPageDetails() {
-      if(typeof this.slug === 'undefined') {
-        this.slug = this.themeOptions.home_page_url;
-      }
+    async getPageDetails() {
 
-      console.log(this.slug)
-
-      getPageService(this.slug, this.type).then((response) => {
-        this.page = response.data;
-        document.title = this.page.post_title;
-      });
+      await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
+      this.page = this.getCurrentPage(this.slug);
+      document.title = this.page.post_title;
     },
   },
 }
