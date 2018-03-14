@@ -23,17 +23,17 @@ export default {
     ])
   },
   created() {
-    // this.setInitThemeOptions();
     this.setInitMenus();
   },
   methods: {
-    // async setInitThemeOptions() {
-    //   await this.$store.dispatch("fetchThemeOptions");
-    // },
-
     async setInitMenus() {
        await this.$store.dispatch("fetchMenu");
     }
   }
 }
 </script>
+
+<style lang="scss">
+  @import './assets/styles/application.scss';
+</style>
+

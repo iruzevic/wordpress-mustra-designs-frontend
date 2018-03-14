@@ -1,6 +1,6 @@
 <template>
 <div>
-  <data-type-controller :data="page" :type="type"></data-type-controller>
+  <page-type-controller :data="page" :type="type"></page-type-controller>
 </div>
 </template>
 
@@ -37,9 +37,6 @@ export default {
 
   beforeRouteUpdate (to, from, next) {
     this.slug = to.params.slug;
-
-    console.log('Nested');
-
     this.getPageDetails();
     next();
   },
@@ -47,14 +44,17 @@ export default {
   methods: {
     async getPageDetails() {
 
+      // Check type of page by checking slug in menu Items.
       this.getMenuItems.map((value, index) => {
         if(value.slug === this.slug) {
           this.type = value.type;
         }
       });
 
+      // Get Page Data.
       await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
 
+      // Set page data with current page data.
       this.page = this.getCurrentPage(this.slug);
       document.title = this.page.post_title;
     },

@@ -8,7 +8,7 @@
     <page-default :page="data"></page-default>
   </div>
   <div v-if="type === 'post'">
-    <post-item :post="data"></post-item>
+    <post-single-item :post="data"></post-single-item>
   </div>
 </div>
 </template>
@@ -16,7 +16,7 @@
 <script>
 
 export default {
-  name: 'DataTypeController',
+  name: 'PageTypeController',
   props: {
     data: Object,
     type: String

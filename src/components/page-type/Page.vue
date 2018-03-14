@@ -1,6 +1,6 @@
 <template>
 <div>
-  <data-type-controller :data="page" :type="type"></data-type-controller>
+  <page-type-controller :data="page" :type="type"></page-type-controller>
 </div>
 </template>
 
@@ -27,17 +27,21 @@ export default {
 
   beforeRouteUpdate (to, from, next) {
     this.slug = to.params.slug;
-
-    console.log('Page');
-
     this.getPageDetails();
     next();
+  },
+
+  created() {
+    this.getPageDetails();
   },
 
   methods: {
     async getPageDetails() {
 
+      // Get Page Data.
       await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
+
+      // Set page data with current page data.
       this.page = this.getCurrentPage(this.slug);
       document.title = this.page.post_title;
     },

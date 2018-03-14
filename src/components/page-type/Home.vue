@@ -1,6 +1,6 @@
 <template>
 <div>
-  <data-type-controller :data="page" :type="type"></data-type-controller>
+  <page-type-controller :data="page" :type="type"></page-type-controller>
 </div>
 </template>
 
@@ -30,11 +30,14 @@ export default {
     },
   },
 
+  watch: {
+    storeMenuItems() {
+      this.getPageDetails();
+    },
+  },
+
   beforeRouteUpdate (to, from, next) {
     this.slug = to.params.slug;
-
-    console.log('Home');
-
     this.getPageDetails();
     next();
   },
@@ -42,14 +45,17 @@ export default {
   methods: {
     async getPageDetails() {
 
+      // Check type of page by checking slug in menu Items.
       this.getMenuItems.map((value, index) => {
         if(value.url === '/') {
           this.slug = value.slug;
         }
       });
 
+      // Get Page Data.
       await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
 
+      // Set page data with current page data.
       this.page = this.getCurrentPage(this.slug);
       document.title = this.page.post_title;
     },

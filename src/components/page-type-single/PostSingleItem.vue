@@ -1,7 +1,7 @@
 
 <template>
 <div>
-  PostItem
+  PostSingleItem
   {{post}}
 </div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 
 export default {
-  name: 'PostItem',
+  name: 'PostSingleItem',
   props: {
     post: Object
   },
