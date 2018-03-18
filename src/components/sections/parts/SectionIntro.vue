@@ -2,14 +2,14 @@
 <template>
 <header class="section-heading">
   <div class="section-heading__container">
-    <h1 class="section-heading__title" v-if="intro.maintitle.title !== ''">
+      {{intro}}
+    <h1 class="section-heading__title" v-if="intro.maintitle">
       {{intro.maintitle.title}}
     </h1>
     <div class="section-heading__subtitle content-style" v-if="intro.subtitle.title !== ''">
       {{intro.subtitle.title}}
     </div>
   </div>
-  <!-- {{intro}} -->
 </header>
 </template>
 
@@ -18,7 +18,16 @@
 export default {
   name: 'SectionIntro',
   props: {
-    intro: Object
+    intro: {
+      maintitle: {
+        title: String,
+        title_size: String,
+        title_seo: String,
+      },
+      subtitle: {
+        title: String
+      }
+    }
   },
 }
 </script>

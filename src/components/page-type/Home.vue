@@ -7,7 +7,8 @@
 <script>
 
 import { mapGetters } from 'vuex'
-import { getMenuItems, getCurrentPage } from '@/store/getters'
+import menu from '@/store/menu';
+import page from '@/store/page';
 
 export default {
   name: 'Home',

@@ -7,7 +7,7 @@
 <script>
 
 import { mapGetters } from 'vuex'
-import { getCurrentPage } from '@/store/getters'
+import page from '@/store/page';
 
 export default {
   name: 'Page',
@@ -42,7 +42,7 @@ export default {
       await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
 
       // Set page data with current page data.
-      this.page = this.getCurrentPage(this.slug);
+      // this.page = this.getCurrentPage(this.slug);
       document.title = this.page.post_title;
     },
   },

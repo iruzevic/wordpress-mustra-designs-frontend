@@ -12,7 +12,7 @@
 <script>
 
 import { mapGetters } from 'vuex'
-import { getMenu } from '@/store/getters'
+import menu from '@/store/menu';
 
 export default {
   name: 'Navigation',

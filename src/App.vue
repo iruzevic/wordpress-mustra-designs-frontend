@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { getMenuItems } from '@/store/getters';
+import menu from '@/store/menu';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -18,7 +18,6 @@ export default {
   },
   computed: {
     ...mapGetters([
-      // 'getThemeOptions',
       'getMenu',
     ])
   },

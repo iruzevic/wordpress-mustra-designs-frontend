@@ -1,12 +1,11 @@
 <template>
 <div>
   <div v-for="section in page.sections" :key="section.acf_fc_id">
-    {{section.section_utilities}}
     <section class="section content-section" data-spacing-top="section.section_utilities.spacing_top">
       <div class="section__container">
         <section-intro :intro="section.section_intro"></section-intro>
 
-        <div v-if="section.acf_fc_layout === 'blog_section'">
+        <!-- <div v-if="section.acf_fc_layout === 'blog_section'">
           <blog-section :section="section"></blog-section>
         </div>
 
@@ -36,7 +35,7 @@
 
         <div v-if="section.acf_fc_layout === 'divider_section'">
           <divider-section :section="section"></divider-section>
-        </div>
+        </div> -->
       </div>
     </section>
   </div>
@@ -47,7 +46,9 @@
 export default {
   name: 'SectionCreator',
   props: {
-    page: Object
+    page: {
+      section_intro: {}
+    }
   },
 }
 </script>
