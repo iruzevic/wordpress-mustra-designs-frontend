@@ -15,6 +15,7 @@ import PageTypeController from './components/PageTypeController.vue';
 
 // Shared.
 import Navigation from './components/shared/Navigation.vue';
+import Loading from './components/shared/Loading.vue';
 
 // Page Type.
 import SectionCreator from './components/page-type-single/SectionCreator.vue';
@@ -36,6 +37,7 @@ import SectionIntro from './components/sections/parts/SectionIntro.vue';
 
 // Shared
 Vue.component('Navigation', Navigation);
+Vue.component('Loading', Loading);
 Vue.component('PageTypeController', PageTypeController);
 Vue.component('SectionCreator', SectionCreator);
 Vue.component('PostSingleItem', PostSingleItem);

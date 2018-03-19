@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <navigation :position="navigationPosition" />
+    <navigation :position="headerNavPosition" />
+    <br/>
     <router-view/>
+    <br/>
+    <navigation :position="footerNavPosition" />
   </div>
 </template>
 
@@ -13,22 +16,10 @@ export default {
   name: 'App',
   data() {
     return {
-      navigationPosition: 'header',
+      headerNavPosition: 'header',
+      footerNavPosition: 'footer',
     };
   },
-  computed: {
-    ...mapGetters([
-      'getMenu',
-    ])
-  },
-  created() {
-    this.setInitMenus();
-  },
-  methods: {
-    async setInitMenus() {
-       await this.$store.dispatch("fetchMenu");
-    }
-  }
 }
 </script>
 

@@ -7,8 +7,8 @@
 <script>
 
 import { mapGetters } from 'vuex'
-import menu from '@/store/menu';
 import page from '@/store/page';
+import * as aTypes from '@/store/actions.type';
 
 export default {
   name: 'Home',
@@ -54,7 +54,7 @@ export default {
       });
 
       // Get Page Data.
-      await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
+      await this.$store.dispatch(aTypes.FETCH_PAGE, {slug: this.slug, type: this.type});
 
       // Set page data with current page data.
       this.page = this.getCurrentPage(this.slug);

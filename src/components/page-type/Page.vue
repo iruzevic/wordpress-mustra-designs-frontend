@@ -1,5 +1,7 @@
 <template>
 <div>
+  <Loading :isLoading="this.isLoading"></Loading>
+  {{page.template}}
   <page-type-controller :data="page" :type="type"></page-type-controller>
 </div>
 </template>
@@ -7,7 +9,9 @@
 <script>
 
 import { mapGetters } from 'vuex'
+import store from '@/store'
 import page from '@/store/page';
+import * as aTypes from '@/store/actions.type';
 
 export default {
   name: 'Page',
@@ -21,29 +25,35 @@ export default {
 
   computed: {
     ...mapGetters([
+      'isLoading',
       'getCurrentPage',
     ]),
   },
 
-  beforeRouteUpdate (to, from, next) {
-    this.slug = to.params.slug;
-    this.getPageDetails();
+  async beforeRouteEnter (to, from, next) {
+    await this.getPageDetails(to.params.slug, 'page');
     next();
   },
 
-  created() {
-    this.getPageDetails();
+  async beforeRouteUpdate (to, from, next) {
+    await this.getPageDetails(to.params.slug, 'page');
+    next();
+  },
+
+  mounted() {
+    this.getPageDetails(this.slug, this.type);
   },
 
   methods: {
-    async getPageDetails() {
+    getPageDetails(slug, type) {
+      this.$store.dispatch(aTypes.FETCH_PAGE, {slug: slug, type: type});
 
-      // Get Page Data.
-      await this.$store.dispatch("fetchPage", {slug: this.slug, type: this.type});
+      // // Get Page Data.
+      // await this.$store.dispatch(aTypes.FETCH_PAGE, {slug: this.slug, type: this.type});
 
-      // Set page data with current page data.
-      // this.page = this.getCurrentPage(this.slug);
-      document.title = this.page.post_title;
+      // // Set page data with current page data.
+      this.page = this.getCurrentPage(this.slug);
+      // document.title = this.page.post_title;
     },
   },
 }

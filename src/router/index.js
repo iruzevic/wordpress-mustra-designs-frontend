@@ -9,21 +9,21 @@ Vue.use(Router);
 export default new Router({
   mode: 'history',
   routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home,
-    },
+    // {
+    //   path: '/',
+    //   name: 'Home',
+    //   component: Home,
+    // },
     {
       path: '/:slug',
       name: 'Page',
       component: Page,
     },
-    {
-      path: '/:type/:slug',
-      name: 'Blog',
-      component: Nested,
-      props: true
-    }
+    // {
+    //   path: '/:type/:slug',
+    //   name: 'Blog',
+    //   component: Nested,
+    //   props: true
+    // }
   ]
 })
