@@ -14,8 +14,7 @@ const state = {
 
 const actions = {
   async [aTypes.FETCH_PAGE] ({commit}, {slug, type}) {
-    
-    console.log(state.pages.hasOwnProperty(slug));
+
     if(!state.pages.hasOwnProperty(slug)) {
       commit(mTypes.SET_PAGE_START);
 
@@ -23,7 +22,7 @@ const actions = {
       try {
         result = await getPageService(slug, type);
       } catch (error) {
-        throw new Error(error)
+        console.error(error);
       }
 
       if (result) {

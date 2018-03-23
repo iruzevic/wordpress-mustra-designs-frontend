@@ -11,7 +11,7 @@ Vue.config.debug = true;
 Vue.config.devTools = true;
 
 // Components.
-import PageTypeController from './components/PageTypeController.vue';
+// import PageTypeController from './components/PageTypeController.vue';
 
 // Shared.
 import Navigation from './components/shared/Navigation.vue';
@@ -38,7 +38,7 @@ import SectionIntro from './components/sections/parts/SectionIntro.vue';
 // Shared
 Vue.component('Navigation', Navigation);
 Vue.component('Loading', Loading);
-Vue.component('PageTypeController', PageTypeController);
+// Vue.component('PageTypeController', PageTypeController);
 Vue.component('SectionCreator', SectionCreator);
 Vue.component('PostSingleItem', PostSingleItem);
 Vue.component('PageDefault', PageDefault);

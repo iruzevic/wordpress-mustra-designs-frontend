@@ -1,8 +1,9 @@
 <template>
 <div>
+  {{storeMenu}}
   <Loading :isLoading="this.isLoading"></Loading>
   <ul>
-    <li v-for="value in menu.items" :key="value.position">
+    <li v-for="value in storeMenu.items" :key="value.position">
       <a v-bind:href="value.url" v-if="value.type === 'custom'" target="_blank">{{value.title}}</a>
       <router-link v-else :to="value.url">{{value.title}}</router-link>
     </li>
@@ -32,27 +33,35 @@ export default {
       'menus',
     ]),
 
-    storeMenu: function() {
-      return this.menus;
+    storeMenu() {
+      console.log('computed');
+      this.menus.map((value, index) => {
+        if(value['position'] === this.position) {
+          console.log(value);
+          return value;
+        }
+      });
+      // return this.menu;
     }
   },
 
-  watch: {
-    storeMenu() {
-      this.menus.map((value, index) => {
-        if(value['position'] === this.position) {
-          this.menu = value;
-        }
-      });
-    }
-  },
+  // watch: {
+  //   storeMenu() {
+  //     console.log('watch');
+  //     this.menus.map((value, index) => {
+  //       if(value['position'] === this.position) {
+  //         this.menu = value;
+  //       }
+  //     });
+  //   }
+  // },
   mounted () {
-    this.fetchMenu()
+    this.fetchMenu();
   },
 
   methods: {
-    fetchMenu () {
-      this.$store.dispatch(aTypes.FETCH_MENU)
+     fetchMenu () {
+       this.$store.dispatch(aTypes.FETCH_MENU)
     },
   }
 }

@@ -25,7 +25,7 @@ const actions = {
     try {
       result = await getMenuService();
     } catch (error) {
-      throw new Error(error)
+      console.error(error);
     }
     
     if (result) {

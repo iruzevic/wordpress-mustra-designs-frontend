@@ -2,7 +2,7 @@
   <div id="app">
     <navigation :position="headerNavPosition" />
     <br/>
-    <router-view/>
+    <router-view :key="$route.path"/>
     <br/>
     <navigation :position="footerNavPosition" />
   </div>
