@@ -1,7 +1,0 @@
-const FETCH_STATUS = {
-  PENDING: 'PENDING',
-  SUCCESSFUL: 'SUCCESSFUL',
-  FAILED: 'FAILED',
-};
-
-export default FETCH_STATUS;
