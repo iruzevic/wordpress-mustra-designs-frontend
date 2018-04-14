@@ -1,10 +1,19 @@
 {
-  "presets": [
-    "es2015",
-    "stage-1"
-  ],
+  "presets": ["next/babel"],
   "plugins": [
     "transform-decorators-legacy",
-    "transform-class-properties"
-  ]
+    ["emotion", { "inline": true }]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        ["env", { "modules": "commonjs" }],
+        "next/babel"
+      ],
+      "plugins": [
+        "transform-decorators-legacy",
+        ["emotion", { "inline": true }]
+      ]
+    }
+  }
 }
