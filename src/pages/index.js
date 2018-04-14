@@ -4,6 +4,8 @@ import {getPageService} from '../services/page';
 import Content from '../components/Content';
 import SectionList from '../components/SectionList';
 
+import store from '../store';
+
 class IndexPage extends React.Component {
   state = {
     loading: false,
@@ -17,8 +19,8 @@ class IndexPage extends React.Component {
     getPageService(url, 'page').then((data) => {
       this.setState({
         page: data,
-        loading: false
-      })
+        loading: false,
+      });
     });
   }
 

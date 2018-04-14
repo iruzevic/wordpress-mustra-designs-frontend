@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import {css} from 'emotion';
+
+const cssTimeline = css`
+  
+`;
 
 export default class TimelineSection extends React.Component {
   render() {
@@ -6,7 +11,7 @@ export default class TimelineSection extends React.Component {
     console.log(section.items);
     return (
       section.items.map((item, index) => {
-        return <div className="timeline" key={index}>
+        return <div className={cssTimeline} key={index}>
           <div className="timeline__item">
             {item.image ? 
               <img src={item.image} className="timeline__img" />
