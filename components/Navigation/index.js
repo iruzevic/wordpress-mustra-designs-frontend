@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Link from 'next/link';
+import Routes from '../../config/routes';
 import {getMenuService} from '../../services/menu';
 import {css} from 'emotion';
 
@@ -26,7 +26,9 @@ class Navigation extends React.Component {
         menus: items[0].items,
         loading: false,
       });
+      console.log(this.state.menus);
     });
+    
   }
 
   render() {
@@ -34,7 +36,13 @@ class Navigation extends React.Component {
       <div>
         {this.state.loading ? 'Loading Menu...' : null}
 
-        {this.state.menus.map((menuItem) => <Link href={menuItem.url} key={menuItem.id}><a className={cssLinks}>{menuItem.title}</a></Link>)}
+        {this.state.menus.map((menuItem) => (
+          <Routes.Link route="root" params={{type: menuItem.type, slug: menuItem.slug}} as={menuItem.url} key={menuItem.id}>
+            <a className={cssLinks}>
+              {menuItem.title}
+            </a>
+          </Routes.Link>
+        ))}
       </div>
     );
   }

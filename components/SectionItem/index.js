@@ -13,14 +13,16 @@ export default class SectionItem extends React.Component {
     const Component = sections[componentName];
 
     return Component ? 
-    <section className={"section " + componentClass} data-spacing-top="">
-      <div className="section__container">
-        <SectionIntro intro={section.section_intro} />
-        <Component section={section} />
-      </div>
-    </section>
-    : <div>Missing section: {componentName} <small>{JSON.stringify(section)}</small></div>;
-  }
+      <section className={"section " + componentClass} data-spacing-top="">
+        <div className="section__container">
+          {section.section_intro ? 
+            <SectionIntro intro={section.section_intro} />
+            : ''}
+          <Component section={section} />
+        </div>
+      </section>
+      : <div>Missing section: {componentName} <small>{JSON.stringify(section)}</small></div>;
+    }
 }
 
 SectionItem.propTypes = {

@@ -50,17 +50,27 @@ class IndexPage extends React.Component {
     });
   }
 
-  static async getInitialProps({asPath}) {
-    console.log(asPath);
+  static async getInitialProps({query}) {
+    console.log('from server side', query.type, query.slug);
     // this.componentState = updateState(asPath);
     // await getPage(this.componentState);
     // return {componentState: this.componentState};
+
+    return {
+      type: query.type,
+    };
   }
 
   render() {
 
     const page = this.state.page;
     const ContentComponent = page.sections ? SectionList : Content;
+
+    const {
+      type,
+    } = this.props;
+
+    console.log('from client', type);
 
     return (
       <div>
