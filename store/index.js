@@ -7,6 +7,7 @@ let store = null;
 class Store {
   @observable cache = {};
   @observable url = '/';
+  @observable isLoading = false;
 
   constructor(initialState = {}) {
     runInAction(() => {
@@ -19,8 +20,16 @@ class Store {
     return this.cache[this.url];
   }
 
+  set loading(data) {
+    this.isLoading = data;
+  }
+
   set page(data) {
-    extendObservable(this.cache, {[this.url]: data});
+    this.isLoading = true;
+    if (typeof this.cache[this.url] === 'undefined') {
+      extendObservable(this.cache, {[this.url]: data});
+    }
+    this.isLoading = false;
   }
 
   @computed get page() {
@@ -38,6 +47,12 @@ class Store {
 }
 
 
-const store = new Store();
-
-export default store;
+export function initStore(isServer, initialState) {
+  if (isServer) {
+    return new Store(initialState);
+  }
+  if (!store) {
+    store = new Store(initialState);
+  }
+  return store;
+}

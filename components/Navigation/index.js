@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Routes from '../../config/routes';
 import {getMenuService} from '../../services/menu';
+import {pageTypes} from '../../utils/pages';
 import {css} from 'emotion';
 
 import routes from 'next-routes';
@@ -26,7 +27,6 @@ class Navigation extends React.Component {
         menus: items[0].items,
         loading: false,
       });
-      console.log(this.state.menus);
     });
     
   }
@@ -36,13 +36,24 @@ class Navigation extends React.Component {
       <div>
         {this.state.loading ? 'Loading Menu...' : null}
 
-        {this.state.menus.map((menuItem) => (
-          <Routes.Link route="root" params={{type: menuItem.type, slug: menuItem.slug}} as={menuItem.url} key={menuItem.id}>
+        {this.state.menus.map((menuItem) => {
+          const type = pageTypes[menuItem.type];
+          const parms = {};
+
+          if (menuItem.type !== 'page') {
+            parms.type = type;
+          }
+
+          if (menuItem.slug !== 'welcome') {
+            parms.slug = menuItem.slug;
+          }
+
+          return <Routes.Link route="root" params={parms} as={menuItem.url} key={menuItem.id}>
             <a className={cssLinks}>
               {menuItem.title}
             </a>
-          </Routes.Link>
-        ))}
+          </Routes.Link>;
+        })}
       </div>
     );
   }

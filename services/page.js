@@ -1,10 +1,31 @@
 import fetch from 'isomorphic-fetch';
 
+import {pageTypes} from '../utils/pages';
+import {apiEndpoint} from '../utils/env';
+
 const dev = process.env.NODE_ENV !== 'production';
 
-export function getPageService(slug, type) {
-  const apiEndpoint = 'http://dev-api.mustra-designs.com';
-  return fetch(`${apiEndpoint}/wp-content/plugins/decoupled-json-content/page/rest-routes/page.php?slug=${slug}&type=${type}`, {
+export function getPageService(asPath) {
+  
+  const url = asPath.split('/').slice(1);
+  const urlFirstSlug = url[0];
+  let slug = url[url.length - 1];
+
+  // Default is page.
+  let type = 'page';
+
+  // If something else check in pageTypes object.
+  if (pageTypes.hasOwnProperty(urlFirstSlug) && url.length > 1) {
+    type = pageTypes[urlFirstSlug];
+  }
+
+  // For home page.
+  // TODO: check from theme options.
+  if (slug === '') {
+    slug = 'welcome';
+  }
+
+  return fetch(`${apiEndpoint}/page/rest-routes/page.php?slug=${slug}&type=${type}`, {
     method: 'GET',
   }).then((res) => res.json());
 }
