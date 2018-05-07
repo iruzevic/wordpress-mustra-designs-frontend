@@ -8,11 +8,16 @@ import SectionList from '../components/SectionList';
 
 import {updateState} from '../utils/helpers';
 import {isServer} from '../utils/env';
+import {observer} from 'mobx-react';
 
-class IndexPage extends React.Component {
+@observer
+export default class IndexPage extends React.Component {
+  output = '';
 
   componentWillMount() {
     const {componentState} = this.props;
+
+    // console.log(componentState, '[AAA]');
 
     if (!isServer) {
       const {url} = this.props;
@@ -20,42 +25,43 @@ class IndexPage extends React.Component {
     } else {
       this.componentState = this.props.componentState;
     }
+
+    // console.log(Object.keys(this.componentState.cache).length);
+    const {page} = this.componentState;
+    
+    if (!page || Object.keys(page.cache).length === 0) {
+      console.log('loading');
+      this.output = 'Loading Page...';
+    } else {
+      console.log('Component');
+      const ContentComponent = page.sections ? SectionList : Content;
+      this.output = <ContentComponent page={page} />;
+    }
   }
 
   static getInitialProps({asPath}) {
     this.componentState = updateState(asPath);
+
     getPageService(asPath).then((data) => {
       this.componentState.page = data;
     });
+    
     return {componentState: this.componentState};
   }
 
-  // static async getInitialProps({query}) {
-  //   console.log('from server side', query);
-  //   this.componentState = updateState(asPath);
-
-  //   // this.componentState = updateState(asPath);
-  //   // await getPage(this.componentState);
-  //   // return {componentState: this.componentState};
-
-  //   return {
-  //     type: query.type,
-  //   };
-  // }
-
   render() {
-    const {page} = this.componentState;
-    console.log(page);
-    const ContentComponent = page.sections ? SectionList : Content;
+    // const {page} = this.componentState;
+    // console.log(this.componentState.isLoading ? 'aaa' : 'BBB');
+    // const ContentComponent = this.componentState.isLoading ? 'aaa' : SectionList;
+    // const ContentComponent = null;
+    // const ContentComponent = page.sections ? SectionList : Content;
+    // {this.componentState.isLoading ? 'Loading Page...' : <ContentComponent page={page} />}
 
     return (
       <div>
         <Navigation position="header" />
-        {this.componentState.isLoading ? 'Loading Page...' : <ContentComponent page={page} />}
+        {this.output}
       </div>
     );
   }
 }
-
-
-export default IndexPage;

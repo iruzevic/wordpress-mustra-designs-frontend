@@ -6,18 +6,18 @@ let store = null;
 
 class Store {
   @observable cache = {};
-  @observable url = '/';
+  @observable currentUrl = '/';
   @observable isLoading = false;
 
   constructor(initialState = {}) {
     runInAction(() => {
       extendObservable(this.cache, initialState.cache || {});
-      this.url = initialState.url || this.url;
+      this.currentUrl = initialState.currentUrl || this.currentUrl;
     });
   }
 
   @computed get rawPage() {
-    return this.cache[this.url];
+    return this.currentUrl in this.cache && this.cache[this.currentUrl];
   }
 
   set loading(data) {
@@ -25,24 +25,32 @@ class Store {
   }
 
   set page(data) {
-    this.isLoading = true;
-    if (typeof this.cache[this.url] === 'undefined') {
-      extendObservable(this.cache, {[this.url]: data});
-    }
-    this.isLoading = false;
+    this.loading = true;
+    // console.log(data, this.cache, this.currentUrl, 'DDDD');
+    // if (typeof this.cache[this.currentUrl] === 'undefined') {
+      extendObservable(this.cache, {[this.currentUrl]: data});
+      console.log(this.cache, 'CACHE');
+      // console.log(data, 'AAAA');
+      // console.log(this.cache, 'BBBB');
+      // console.log(this.currentUrl, 'CCCC');
+    // }
+    this.loading = false;
   }
 
   @computed get page() {
+    // console.log(this.cache, this.currentUrl, this.isLoading);
+    // return this.cache;
     const raw = this.rawPage;
-    return raw ? {
-      raw,
-      id: raw.page_id,
-      layout: normalizeSectionName(raw.layout || 'main'),
-      sections: raw.template ? raw.meta : null,
-      content: raw.content && raw.content.rendered,
-      title: raw.title && raw.title.rendered,
-      description: raw.description,
-    } : null;
+    return raw;
+    // return raw ? {
+    //   raw,
+    //   id: raw.page_id,
+    //   layout: normalizeSectionName(raw.layout || 'main'),
+    //   sections: raw.template ? raw.meta : null,
+    //   content: raw.content && raw.content.rendered,
+    //   title: raw.title && raw.title.rendered,
+    //   description: raw.description,
+    // } : null;
   }
 }
 

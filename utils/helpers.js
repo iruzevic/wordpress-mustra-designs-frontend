@@ -10,7 +10,7 @@ export function normalizeSectionName(rawName) {
 export function updateState(asPath, initialState) {
   const state = initStore(isServer, initialState);
   
-  state.url = asPath;
+  state.currentUrl = asPath;
 
   if (!isServer && !isProduction && !window.debug) {
     window.debug = {
