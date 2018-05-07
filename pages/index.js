@@ -17,8 +17,6 @@ export default class IndexPage extends React.Component {
   componentWillMount() {
     const {componentState} = this.props;
 
-    console.log(componentState, 'componentWillMount');
-
     if (!isServer) {
       const {url} = this.props;
       this.componentState = updateState(url ? url.asPath : '/', componentState);
@@ -26,38 +24,30 @@ export default class IndexPage extends React.Component {
       this.componentState = this.props.componentState;
     }
 
-    // console.log(Object.keys(this.componentState.cache).length);
     const {page} = this.componentState;
-
-    console.log(page);
 
     if (!page) {
       console.log('loading');
       this.output = 'Loading Page...';
     } else {
-      console.log('Component');
+      console.log(page, 'Component');
       const ContentComponent = page.sections ? SectionList : Content;
       this.output = <ContentComponent page={page} />;
     }
+
+    console.log('componentWillMount');
   }
 
   static async getInitialProps({asPath}) {
     this.componentState = updateState(asPath);
 
-    console.log('getInitialProps');
     await getPageService(this.componentState);
+    console.log('getInitialProps');
     
     return {componentState: this.componentState};
   }
 
   render() {
-    // const {page} = this.componentState;
-    // console.log(this.componentState.isLoading ? 'aaa' : 'BBB');
-    // const ContentComponent = this.componentState.isLoading ? 'aaa' : SectionList;
-    // const ContentComponent = null;
-    // const ContentComponent = page.sections ? SectionList : Content;
-    // {this.componentState.isLoading ? 'Loading Page...' : <ContentComponent page={page} />}
-
     return (
       <div>
         <Navigation position="header" />

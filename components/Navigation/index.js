@@ -4,7 +4,6 @@ import {getMenuService} from '../../services/menu';
 import {pageTypes} from '../../utils/pages';
 import {css} from 'emotion';
 
-import routes from 'next-routes';
 
 const cssLinks = css`
   display: block;
