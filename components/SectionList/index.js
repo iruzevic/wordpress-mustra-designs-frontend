@@ -19,6 +19,6 @@ export default class SectionList extends React.Component {
 
 SectionList.propTypes = {
   page: PropTypes.shape({
-    sections: PropTypes.array,
+    sections: PropTypes.object,
   }),
 };

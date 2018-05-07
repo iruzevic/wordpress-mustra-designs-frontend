@@ -17,7 +17,7 @@ export default class IndexPage extends React.Component {
   componentWillMount() {
     const {componentState} = this.props;
 
-    // console.log(componentState, '[AAA]');
+    console.log(componentState, 'componentWillMount');
 
     if (!isServer) {
       const {url} = this.props;
@@ -28,8 +28,10 @@ export default class IndexPage extends React.Component {
 
     // console.log(Object.keys(this.componentState.cache).length);
     const {page} = this.componentState;
-    
-    if (!page || Object.keys(page.cache).length === 0) {
+
+    console.log(page);
+
+    if (!page) {
       console.log('loading');
       this.output = 'Loading Page...';
     } else {
@@ -39,12 +41,11 @@ export default class IndexPage extends React.Component {
     }
   }
 
-  static getInitialProps({asPath}) {
+  static async getInitialProps({asPath}) {
     this.componentState = updateState(asPath);
 
-    getPageService(asPath).then((data) => {
-      this.componentState.page = data;
-    });
+    console.log('getInitialProps');
+    await getPageService(this.componentState);
     
     return {componentState: this.componentState};
   }

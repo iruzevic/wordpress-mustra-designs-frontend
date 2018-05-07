@@ -7,7 +7,6 @@ let store = null;
 class Store {
   @observable cache = {};
   @observable currentUrl = '/';
-  @observable isLoading = false;
 
   constructor(initialState = {}) {
     runInAction(() => {
@@ -17,29 +16,16 @@ class Store {
   }
 
   @computed get rawPage() {
-    return this.currentUrl in this.cache && this.cache[this.currentUrl];
-  }
-
-  set loading(data) {
-    this.isLoading = data;
+    return this.cache[this.currentUrl];
   }
 
   set page(data) {
-    this.loading = true;
-    // console.log(data, this.cache, this.currentUrl, 'DDDD');
-    // if (typeof this.cache[this.currentUrl] === 'undefined') {
+    if (this.cache.hasOwnProperty(this.currentUrl) === false) {
       extendObservable(this.cache, {[this.currentUrl]: data});
-      console.log(this.cache, 'CACHE');
-      // console.log(data, 'AAAA');
-      // console.log(this.cache, 'BBBB');
-      // console.log(this.currentUrl, 'CCCC');
-    // }
-    this.loading = false;
+    }
   }
 
   @computed get page() {
-    // console.log(this.cache, this.currentUrl, this.isLoading);
-    // return this.cache;
     const raw = this.rawPage;
     return raw;
     // return raw ? {
