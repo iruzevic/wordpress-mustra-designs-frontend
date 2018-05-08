@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class HeroSection extends React.Component {
+export class HeroSection extends React.Component {
   render() {
     return (
       'HeroSection'
-    )
+    );
   }
 }

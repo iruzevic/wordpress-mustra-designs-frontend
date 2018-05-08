@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ContentSection extends React.Component {
+export class ContentSection extends React.Component {
   render() {
     return (
       'ContentSection'
-    )
+    );
   }
 }

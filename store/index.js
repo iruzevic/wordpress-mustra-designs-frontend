@@ -1,6 +1,6 @@
 import {computed, extendObservable, runInAction, observable} from 'mobx';
 
-import {normalizeSectionName} from '../utils/helpers';
+import {normalizeSectionName, normalizeSectionClassName} from '../utils/helpers';
 
 let store = null;
 
@@ -27,16 +27,36 @@ class Store {
 
   @computed get page() {
     const raw = this.rawPage;
-    return raw;
-    // return raw ? {
-    //   raw,
-    //   id: raw.page_id,
-    //   layout: normalizeSectionName(raw.layout || 'main'),
-    //   sections: raw.template ? raw.meta : null,
-    //   content: raw.content && raw.content.rendered,
-    //   title: raw.title && raw.title.rendered,
-    //   description: raw.description,
-    // } : null;
+    let sections = null;
+
+    if (raw && raw.sections) {
+      sections = raw.sections.map((element) => {
+        if (element.hasOwnProperty('acf_fc_layout')) {
+          element.section_name = normalizeSectionName(element.acf_fc_layout); // eslint-disable-line camelcase
+          element.section_class_name = normalizeSectionClassName(element.acf_fc_layout); // eslint-disable-line camelcase
+        }
+  
+        return element;
+      });
+    }
+
+    return raw ? {
+      id: raw.ID,
+      slug: raw.post_name,
+      title: raw.post_title,
+      content: raw.post_content,
+      authorId: raw.post_author,
+      parentId: raw.post_parent,
+      featuredImage: raw.featured_image,
+      postDate: raw.post_date,
+      postModifiedDate: raw.post_modified,
+      postExcerpt: raw.post_excerpt,
+      postStatus: raw.post_status,
+      postType: raw.post_type,
+      template: raw.template,
+      sections,
+
+    } : null;
   }
 }
 

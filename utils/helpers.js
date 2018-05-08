@@ -1,10 +1,14 @@
-import {camelCase, upperFirst} from 'lodash';
+import {camelCase, upperFirst, toLower} from 'lodash';
 
 import {initStore} from '../store';
 import {isProduction, isServer} from '../utils/env';
 
 export function normalizeSectionName(rawName) {
   return upperFirst(camelCase(rawName));
+}
+
+export function normalizeSectionClassName(rawName) {
+  return toLower(rawName.replace(/_/g, '-'));
 }
 
 export function updateState(asPath, initialState) {

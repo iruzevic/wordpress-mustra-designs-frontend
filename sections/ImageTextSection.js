@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ImageTextSection extends React.Component {
+export class ImageTextSection extends React.Component {
   render() {
     return (
       'ImageTextSection'
-    )
+    );
   }
 }

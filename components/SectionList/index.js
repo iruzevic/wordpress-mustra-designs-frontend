@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SectionItem from '../SectionItem';
+import {SectionItem} from '../SectionItem';
 
-export default class SectionList extends React.Component {
+export class SectionList extends React.Component {
   render() {
-    const page = this.props.page;
-    const sections = page.sections.map((section, index) => <SectionItem key={`${page.ID}_${index}`} section={section} />);
+    const {page} = this.props;
+    const sections = page.sections.map((section, index) => <SectionItem key={`${page.id}_${index}`} section={section} />);
     return (
       <div>
-        <h1>{page.post_title}</h1>
-        {sections}
+        <h1>{page.title ? page.title : ''}</h1>
+        {sections ? sections : ''}
       </div>
     );
   }
 }
 
 SectionList.propTypes = {
-  page: PropTypes.shape({
-    sections: PropTypes.object,
-  }),
+  page: PropTypes.object,
 };

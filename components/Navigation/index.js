@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {css} from 'emotion';
+
 import Routes from '../../config/routes';
+
 import {getMenuService} from '../../services/menu';
 import {pageTypes} from '../../utils/pages';
-import {css} from 'emotion';
 
 
 const cssLinks = css`
@@ -10,13 +12,13 @@ const cssLinks = css`
 `;
 
 
-class Navigation extends React.Component {
+export class Navigation extends React.Component {
   state = {
     loading: false,
     menus: [],
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({loading: true});
     
     getMenuService().then((data) => {
@@ -57,5 +59,3 @@ class Navigation extends React.Component {
     );
   }
 }
-
-export default Navigation;

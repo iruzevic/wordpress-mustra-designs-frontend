@@ -3,8 +3,6 @@ import fetch from 'isomorphic-fetch';
 import {pageTypes} from '../utils/pages';
 import {apiEndpoint} from '../utils/env';
 
-const dev = process.env.NODE_ENV !== 'production';
-
 export async function getPageService(state) {
   if (!state.page) {
     const asPath = state.currentUrl;

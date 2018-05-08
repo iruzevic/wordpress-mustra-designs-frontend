@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class DividerSection extends React.Component {
+export class DividerSection extends React.Component {
   render() {
     return (
       'DividerSection'
-    )
+    );
   }
 }

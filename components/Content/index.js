@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Content extends React.Component {
+export class Content extends React.Component {
   render() {
-    const page = this.props.page;
+    const {page} = this.props;
 
     return (
       <div>
-        <h1>{page.post_title}</h1>
-        {page.post_content}
+        <h1>{page.title ? page.title : ''}</h1>
+        {page.content ? page.content : ''}
       </div>
     );
   }
 }
 
-export default Content;
+Content.propTypes = {
+  page: PropTypes.object,
+};
