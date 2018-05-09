@@ -1,3 +1,4 @@
+import App, {Container} from 'next/app';
 import React from 'react';
 import {observer} from 'mobx-react';
 
@@ -9,16 +10,12 @@ import {Navigation} from '../components/Navigation';
 import {Content} from '../components/Content';
 import {SectionList} from '../components/SectionList';
 
-
 @observer
-export default class IndexPage extends React.Component {
-  output = '';
-
-  static async getInitialProps(context) {
-    const store = updateState(context.asPath);
+export default class MyApp extends App {
+  static async getInitialProps({ctx}) {
+    const store = updateState(ctx.asPath);
 
     const page = await getPageService(store);
-
     return {page};
   }
 
@@ -28,10 +25,10 @@ export default class IndexPage extends React.Component {
     const ContentComponent = page.sections ? SectionList : Content;
 
     return (
-      <div>
+      <Container>
         <Navigation position="header" />
         {!page ? 'Loading page...' : <ContentComponent page={page} />}
-      </div>
+      </Container>
     );
   }
 }

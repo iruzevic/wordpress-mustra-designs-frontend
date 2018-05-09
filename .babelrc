@@ -2,6 +2,7 @@
   "presets": ["next/babel"],
   "plugins": [
     "transform-decorators-legacy",
+    "transform-class-properties",
     ["emotion", { "inline": true }]
   ],
   "env": {
@@ -12,6 +13,7 @@
       ],
       "plugins": [
         "transform-decorators-legacy",
+        "transform-class-properties",
         ["emotion", { "inline": true }]
       ]
     }
