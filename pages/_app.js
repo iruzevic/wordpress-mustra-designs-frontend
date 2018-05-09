@@ -5,6 +5,7 @@ import {observer} from 'mobx-react';
 import {updateState} from '../utils/helpers';
 
 import {getPageService} from '../services/page';
+import {getThemeOptionsService} from '../services/themeOptions';
 
 import {Navigation} from '../components/Navigation';
 import {Content} from '../components/Content';
@@ -15,6 +16,7 @@ export default class MyApp extends App {
   static async getInitialProps({ctx}) {
     const store = updateState(ctx.asPath);
 
+    // const themeOptions = await getThemeOptionsService();
     const page = await getPageService(store);
     return {page};
   }

@@ -7,6 +7,7 @@ let store = null;
 class Store {
   @observable cache = {};
   @observable currentUrl = '/';
+  // @observable themeOptions = {};
 
   constructor(initialState = {}) {
     runInAction(() => {
@@ -19,11 +20,19 @@ class Store {
     return this.cache[this.currentUrl];
   }
 
+  // set themeOptions(data) {
+  //   this.themeOptions = data;
+  // }
+
   set page(data) {
     if (this.cache.hasOwnProperty(this.currentUrl) === false) {
       extendObservable(this.cache, {[this.currentUrl]: data});
     }
   }
+
+  // get themeOptions() {
+  //   return this.themeOptions ? this.themeOptions : null;
+  // }
 
   @computed get page() {
     const raw = this.rawPage;

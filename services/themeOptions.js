@@ -1,5 +1,14 @@
-export function getPageService(slug, type) {
-  return fetch('http://dev-api.mustra-designs.com/wp-content/plugins/mustra-designs/rest-routes/theme-options.php', {
-    method: 'GET',
-  }).then((res) => res.json());
+import fetch from 'isomorphic-fetch';
+import {apiEndpoint} from '../utils/env';
+
+export async function getThemeOptionsService(state) {
+  console.log(state);
+  // if (!state.themeOptions) {
+  //   const res = await fetch(`${apiEndpoint}page/rest-routes/theme-options.php`);
+  //   const data = await res.json();
+
+  //   state.themeOptions = data;
+  // }
+
+  // return state.themeOptions;
 }
