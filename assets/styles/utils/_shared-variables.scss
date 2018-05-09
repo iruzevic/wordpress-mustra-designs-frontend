@@ -1,0 +1,56 @@
+//Base
+$base-font-family-primary: 'SourceSansPro', Arial, sans-serif;
+$base-icons-font-family: 'hpb';
+
+// Container
+$base-content-padding: 15px;
+$base-content-full-width: 1200px;
+$base-content-width: $base-content-full-width + ($base-content-padding*2);
+
+//Typography
+$typography-map: (
+  desktop: (
+    giant:        64px,
+    huge:         52px,
+    big:          30px,
+    largest:      24px,
+    larger:       22px,
+    large:        20px,
+    default:      18px,
+  )
+);
+
+// Buttons
+$button-size-map: (
+  desktop: (
+    default: (
+      text-size: 20px,
+      line-height: 1.4,
+      height: 50px,
+    ),
+  )
+);
+
+//Section
+$section-spacing-map: (
+  desktop: (
+    default:    35px,
+    no-spacing: 0
+  )
+);
+
+// // Input
+// $input-height-map: (
+//   small: (
+//     default: (
+//       text-size: 18px,
+//       height: 57px,
+//     )
+//   ),
+//   desktop: (
+//     default: (
+//       text-size: 24px,
+//       height: 64px,
+//     )
+//   )
+// );
