@@ -16,6 +16,14 @@ class Store {
     });
   }
 
+  set currentPage(data) {
+    this.currentUrl = data;
+  }
+
+  @computed get currentPage() {
+    return this.currentPage;
+  }
+
   @computed get rawPage() {
     return this.cache[this.currentUrl];
   }

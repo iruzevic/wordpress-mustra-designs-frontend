@@ -5,6 +5,8 @@ import {apiEndpoint} from '../utils/env';
 
 export async function getPageService(state) {
   if (!state.page) {
+
+    console.log(state.themeOptions.home_page_url);
     const asPath = state.currentUrl;
     const url = asPath.split('/').slice(1);
     const urlFirstSlug = url[0];
@@ -19,9 +21,8 @@ export async function getPageService(state) {
     }
   
     // For home page.
-    // TODO: check from theme options.
     if (slug === '') {
-      slug = 'welcome';
+      slug = state.themeOptions.home_page_url;
     }
     const res = await fetch(`${apiEndpoint}page/rest-routes/page.php?slug=${slug}&type=${type}`);
     const data = await res.json();

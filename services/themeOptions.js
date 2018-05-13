@@ -1,14 +1,13 @@
 import fetch from 'isomorphic-fetch';
-import {apiEndpoint} from '../utils/env';
+import {apiEndpointMustra} from '../utils/env';
 
 export async function getThemeOptionsService(state) {
-  console.log(state);
-  // if (!state.themeOptions) {
-  //   const res = await fetch(`${apiEndpoint}page/rest-routes/theme-options.php`);
-  //   const data = await res.json();
+  if (!state.themeOptions) {
+    const res = await fetch(`${apiEndpointMustra}rest-routes/theme-options.php`);
+    const data = await res.json();
 
-  //   state.themeOptions = data;
-  // }
+    state.themeOptions = data;
+  }
 
-  // return state.themeOptions;
+  return state.themeOptions;
 }

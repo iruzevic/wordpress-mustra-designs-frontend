@@ -12,17 +12,14 @@ export class SectionItem extends React.Component {
     const Component = sections[section.section_name];
 
     return Component
-      ?
-      <section className={`section ${section.section_class_name} `} data-spacing-top="">
+      ? <section className={`section ${section.section_class_name} `} data-spacing-top="">
         <div className="section__container">
           {section.section_intro
-            ?
-            <SectionIntro intro={section.section_intro} />
+            ? <SectionIntro intro={section.section_intro} />
             : ''}
           <Component section={section} />
         </div>
-      </section>
-      : <div>Missing section: {section.section_name} <small>{JSON.stringify(section)}</small></div>;
+      </section> : <div>Missing section: {section.section_name} <small>{JSON.stringify(section)}</small></div>;
   }
 }
 

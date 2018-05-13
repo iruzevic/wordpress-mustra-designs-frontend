@@ -1,35 +1,24 @@
 import App, {Container} from 'next/app';
 import React from 'react';
-import {observer} from 'mobx-react';
 
-import {updateState} from '../utils/helpers';
-
-import {getPageService} from '../services/page';
-import {getThemeOptionsService} from '../services/themeOptions';
-
-import {Navigation} from '../components/Navigation';
-import {Content} from '../components/Content';
-import {SectionList} from '../components/SectionList';
-
-@observer
 export default class MyApp extends App {
-  static async getInitialProps({ctx}) {
-    const store = updateState(ctx.asPath);
+  static async getInitialProps({Component, ctx}) {
+    let pageProps = {};
 
-    // const themeOptions = await getThemeOptionsService();
-    const page = await getPageService(store);
-    return {page};
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    return {pageProps};
   }
 
   render() {
-    const {page} = this.props;
 
-    const ContentComponent = page.sections ? SectionList : Content;
+    const {Component, pageProps} = this.props;
 
     return (
       <Container>
-        <Navigation position="header" />
-        {!page ? 'Loading page...' : <ContentComponent page={page} />}
+        <Component {...pageProps} />
       </Container>
     );
   }

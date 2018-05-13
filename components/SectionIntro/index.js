@@ -2,18 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {css} from 'emotion';
 
+import {colors, baseColors} from './../../styles/utils/colors';
+import {sharedVariables, fontSizes} from './../../styles/utils/shared-variables';
+import {resets} from './../../styles/utils/resets';
+
 const cssHeading = css`
   text-align: center;
   margin-bottom: 55px;
+  color: ${colors.dark};
 `;
 
 const cssTitle = css`
     text-transform: uppercase;
     font-weight: bold;
+    font-size: ${fontSizes.giant};
+    ${resets.heading};
+
 `;
 
 const cssSubTitle = css`
     font-weight: 600;
+    font-size: ${fontSizes.large};
+    color: ${colors.chalice};
 `;
 
 export class SectionIntro extends React.Component {
@@ -26,15 +36,13 @@ export class SectionIntro extends React.Component {
         <div className="section-heading__container">
            
           {intro.maintitle.title
-            ?
-            <Heading className={`${cssTitle} section-heading__title  ${intro.maintitle.title_size ? intro.maintitle.title_size : ''}`}>
+            ? <Heading className={`${cssTitle} section-heading__title  ${intro.maintitle.title_size ? intro.maintitle.title_size : ''}`}>
               {intro.maintitle.title}
             </Heading>
             : ''}
             
           {intro.subtitle.title
-            ?
-            <div className={`${cssSubTitle} section-heading__subtitle content-style`}>
+            ? <div className={`${cssSubTitle} section-heading__subtitle content-style`}>
               {intro.subtitle.title}
             </div>
             : ''}
