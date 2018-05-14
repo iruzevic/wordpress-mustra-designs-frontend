@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import {css} from 'emotion';
 
 import {colors, baseColors} from './../../styles/utils/colors';
-import {sharedVariables, fontSizes} from './../../styles/utils/shared-variables';
+import {fontSizes} from './../../styles/utils/shared-variables';
 import {resets} from './../../styles/utils/resets';
 
 const cssHeading = css`
   text-align: center;
-  margin-bottom: 55px;
+  margin-bottom: 35px;
   color: ${colors.dark};
 `;
 

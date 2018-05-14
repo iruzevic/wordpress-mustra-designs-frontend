@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {css} from 'emotion';
 
 import {normalizeSectionName} from '../../utils/helpers';
 
 import * as sections from '../../sections';
 import {SectionIntro} from '../SectionIntro';
+
+import {placeholders} from './../../styles/utils/placeholders';
+
+const cssContainer = css`
+  ${placeholders.siteContainer};
+`;
 
 export class SectionItem extends React.Component {
   render() {
@@ -13,7 +20,7 @@ export class SectionItem extends React.Component {
 
     return Component
       ? <section className={`section ${section.section_class_name} `} data-spacing-top="">
-        <div className="section__container">
+        <div className={`${cssContainer}`}>
           {section.section_intro
             ? <SectionIntro intro={section.section_intro} />
             : ''}

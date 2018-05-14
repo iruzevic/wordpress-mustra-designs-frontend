@@ -7,7 +7,7 @@ import {updateState} from '../utils/helpers';
 import {getPageService} from '../services/page';
 import {getThemeOptionsService} from '../services/themeOptions';
 
-import {Navigation} from '../components/Navigation';
+import {Header} from '../components/Header';
 import {Content} from '../components/Content';
 import {SectionList} from '../components/SectionList';
 
@@ -31,7 +31,7 @@ export default class Index extends React.Component {
     
     return (
       <div>
-        <Navigation position="header" />
+        <Header />
         {!page ? 'Loading page...' : <ContentComponent page={page} />}
       </div>
     );

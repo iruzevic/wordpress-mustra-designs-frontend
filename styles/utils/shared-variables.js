@@ -1,7 +1,8 @@
 export const sharedVariables = {
   baseFontFamily: 'Source Sans Pro, sans-serif',
-  baseContentPadding: '15px',
-  baseContentFullWidth: '1200px',
+  baseContentPadding: 15,
+  baseContentFullWidth: 1005,
+  baseContentLargeFullWidth: 1200,
 };
 
 
@@ -18,4 +19,5 @@ export const fontSizes = {
 
 export const containers = {
   default: sharedVariables.baseContentFullWidth + (sharedVariables.baseContentPadding * 2),
+  large: sharedVariables.baseContentLargeFullWidth + (sharedVariables.baseContentPadding * 2),
 };

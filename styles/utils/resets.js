@@ -1,19 +1,31 @@
 import {css} from 'emotion';
 
-const listReset = css`
+const list = css`
   margin: 0;
   padding: 0;
   list-style: none;
 `;
 
-const headingReset = css`
+const heading = css`
   margin: 0;
   padding: 0;
 `;
 
+const button = css`
+  padding: 0;
+  border: 0;
+  appearance: none;
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const resets = {
-  list: listReset,
-  heading: headingReset,
-  paragraph: headingReset,
+  list,
+  heading,
+  paragraph: heading,
+  button,
 };
 

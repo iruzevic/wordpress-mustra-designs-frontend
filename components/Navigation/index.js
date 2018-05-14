@@ -7,30 +7,14 @@ import {getMenuService} from '../../services/menu';
 import {pageTypes} from '../../utils/pages';
 
 import {colors} from './../../styles/utils/colors';
-import {containers} from './../../styles/utils/shared-variables';
 import {resets} from './../../styles/utils/resets';
 
 const localColors = {
-  bg: colors.dark,
-  text: colors.white,
   navLinkBorderDefault: colors.dark,
   navLinkBorderActive: colors.white,
 };
 
-const cssHeader = css`
-  display: block;
-  height: 100px;
-  background-color: ${localColors.bg};
-  color: ${localColors.text};
-`;
-
-const cssHeaderContainer = css`
-  max-widht: ${containers.default}
-  margin: 0 auto;
-  height: 100%;
-`;
-
-const cssNavigation = css`
+const cssList = css`
   display: flex;
   align-items: center;
   jutifiy-content: space-between;
@@ -38,7 +22,7 @@ const cssNavigation = css`
   height: 100%;
 `;
 
-const cssNavigationItem = css`
+const cssItem = css`
   margin-right: 75px;
   text-align: center;
 
@@ -47,10 +31,11 @@ const cssNavigationItem = css`
   }
 `;
 
-const cssNavigationLink = css`
+const cssLink = css`
   display: block;
   cursor: pointer;
   position: relative;
+  font-weight: 600;
 
   &::after {
     content: '';
@@ -65,6 +50,10 @@ const cssNavigationLink = css`
   &:hover::after {
     background-color: ${localColors.navLinkBorderActive};
   }
+`;
+
+const cssLinkBtn = css`
+  ${resets.button};
 `;
 
 
@@ -90,34 +79,30 @@ export class Navigation extends React.Component {
 
   render() {
     return (
-      <div className={`header ${cssHeader}`}>
-        <div className={`header__container ${cssHeaderContainer}`}>
-          <ul className={`navigation ${cssNavigation}`}>
-            {this.state.loading ? 'Loading Menu...' : null}
+      <ul className={`navigation ${cssList}`}>
+        {this.state.loading ? 'Loading Menu...' : null}
 
-            {this.state.menus.map((menuItem) => {
-              const type = pageTypes[menuItem.type];
-              const parms = {};
+        {this.state.menus.map((menuItem) => {
+          const type = pageTypes[menuItem.type];
+          const parms = {};
 
-              if (menuItem.type !== 'page') {
-                parms.type = type;
-              }
+          if (menuItem.type !== 'page') {
+            parms.type = type;
+          }
 
-              if (menuItem.slug !== 'welcome') {
-                parms.slug = menuItem.slug;
-              }
+          if (menuItem.slug !== 'welcome') {
+            parms.slug = menuItem.slug;
+          }
 
-              return <Routes.Link route="root" params={parms} as={menuItem.url} key={menuItem.id}>
-                <li className={`navigation__item ${cssNavigationItem}`}>
-                  <a className={`navigation__link ${cssNavigationLink}`}>
-                    {menuItem.title}
-                  </a>
-                </li>
-              </Routes.Link>;
-            })}
-          </ul>
-        </div>
-      </div>
+          return <Routes.Link route="root" params={parms} as={menuItem.url} key={menuItem.id}>
+            <li className={`navigation__item ${cssItem}`}>
+              <a className={`navigation__link ${cssLink} ${(menuItem.classes === 'btn') ? cssLinkBtn : ''}`}>
+                {menuItem.title}
+              </a>
+            </li>
+          </Routes.Link>;
+        })}
+      </ul>
     );
   }
 }

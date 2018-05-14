@@ -1,7 +1,7 @@
 import {injectGlobal} from 'emotion';
 import emotionNormalize from 'emotion-normalize';
 
-import {colors, baseColors} from './../styles/utils/colors';
+import {baseColors} from './../styles/utils/colors';
 import {sharedVariables, fontSizes} from './../styles/utils/shared-variables';
 
 injectGlobal`
