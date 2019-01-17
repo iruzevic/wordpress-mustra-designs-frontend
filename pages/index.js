@@ -4,8 +4,9 @@ import {observer} from 'mobx-react';
 
 import {updateState} from '../utils/helpers';
 
-import {getPageService} from '../services/page';
+import {getPageService} from './../services/page';
 import {getThemeOptionsService} from '../services/themeOptions';
+import {getMenuService} from './../services/menu';
 
 import {Header} from '../components/Header';
 import {Content} from '../components/Content';
@@ -18,20 +19,26 @@ export default class Index extends React.Component {
     let page = {};
 
     const themeOptions = await getThemeOptionsService(store);
+    const menu = await getMenuService(store);
 
     if (themeOptions) {
       page = await getPageService(store);
+      store.page = page;
     }
+
     return {page};
   }
 
   render() {
-    const {page} = this.props;
+    const {page, store} = this.props;
+
+    console.log(this.props);
+    
     const ContentComponent = page.sections ? SectionList : Content;
     
     return (
       <div>
-        <Header />
+        <Header store={store} />
         {!page ? 'Loading page...' : <ContentComponent page={page} />}
       </div>
     );

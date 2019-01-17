@@ -6,7 +6,7 @@ import {apiEndpoint} from '../utils/env';
 export async function getPageService(state) {
   if (!state.page) {
 
-    console.log(state.themeOptions.home_page_url);
+    // console.log(state.themeOptions.home_page_url);
     const asPath = state.currentUrl;
     const url = asPath.split('/').slice(1);
     const urlFirstSlug = url[0];

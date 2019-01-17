@@ -7,7 +7,8 @@ let store = null;
 class Store {
   @observable cache = {};
   @observable currentUrl = '/';
-  // @observable themeOptions = {};
+  @observable menuCache = {};
+  @observable themeOptions = {};
 
   constructor(initialState = {}) {
     runInAction(() => {
@@ -28,35 +29,28 @@ class Store {
     return this.cache[this.currentUrl];
   }
 
-  // set themeOptions(data) {
-  //   this.themeOptions = data;
-  // }
-
   set page(data) {
     if (this.cache.hasOwnProperty(this.currentUrl) === false) {
       extendObservable(this.cache, {[this.currentUrl]: data});
     }
   }
 
-  // get themeOptions() {
-  //   return this.themeOptions ? this.themeOptions : null;
-  // }
-
+  
   @computed get page() {
     const raw = this.rawPage;
     let sections = null;
-
+    
     if (raw && raw.sections) {
       sections = raw.sections.map((element) => {
         if (element.hasOwnProperty('acf_fc_layout')) {
           element.section_name = normalizeSectionName(element.acf_fc_layout); // eslint-disable-line camelcase
           element.section_class_name = normalizeSectionClassName(element.acf_fc_layout); // eslint-disable-line camelcase
         }
-  
+        
         return element;
       });
     }
-
+    
     return raw ? {
       id: raw.ID,
       slug: raw.post_name,
@@ -72,9 +66,28 @@ class Store {
       postType: raw.post_type,
       template: raw.template,
       sections,
-
+      
     } : null;
   }
+
+  // set themeOptions(data) {
+  //   this.themeOptions = data;
+  // }
+
+  // get themeOptions() {
+  //   return this.themeOptions ? this.themeOptions : null;
+  // }
+
+  set menu(data) {
+    // console.log(data, 'stormenu');
+    extendObservable(this.menu, {data});
+    // this.menuCache = data;
+  }
+
+  get menu() {
+    return this.menuCache;
+  }
+
 }
 
 

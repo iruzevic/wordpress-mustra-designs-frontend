@@ -1,6 +1,8 @@
 import React from 'react';
 import {css} from 'emotion';
 
+import {observer} from 'mobx-react';
+
 import {Navigation} from '../../components/Navigation';
 
 import {placeholders} from './../../styles/utils/placeholders';
@@ -34,8 +36,11 @@ const cssWrap = css`
 const cssItem = css`
 `;
 
+@observer
 export class Header extends React.Component {
   render() {
+    const {store} = this.props;
+
     return (
       <div className={`header ${cssHeader}`}>
         <div className={`header__container ${cssContainer}`}>
@@ -45,7 +50,7 @@ export class Header extends React.Component {
             </div>
 
             <div className={`header__item ${cssItem}`}>
-              <Navigation position="header" />
+              <Navigation position="header" store={store} />
             </div>
           </div>
         </div>

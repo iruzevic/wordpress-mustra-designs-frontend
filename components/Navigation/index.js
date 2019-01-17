@@ -1,7 +1,9 @@
 import React from 'react';
 import {css} from 'emotion';
+import {observer} from 'mobx-react';
 
 import Routes from '../../config/routes';
+import {updateState} from './../../utils/helpers';
 
 import {getMenuService} from '../../services/menu';
 import {pageTypes} from '../../utils/pages';
@@ -56,28 +58,44 @@ const cssLinkBtn = css`
   ${resets.button};
 `;
 
-
+@observer
 export class Navigation extends React.Component {
-  state = {
-    loading: false,
-    menus: [],
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      menues: {},
+    };
   }
 
-  componentDidMount() {
-    this.setState({loading: true});
-    
-    getMenuService().then((data) => {
-      const items = data.filter((value) => value.position === this.props.position);
+  async componentDidMount() {
+    console.log(await this.props, 'AAASSAFASF');
 
-      this.setState({
-        menus: items[0].items,
-        loading: false,
-      });
-    });
-    
+    // if (!store.menu) {
+    //   this.state.menu = store.menu.filter((value) => value.position === this.props.position);
+    // }
   }
+
+  // componentDidMount() {
+  //   this.setState({loading: true});
+    
+  //   getMenuService().then((data) => {
+  //     const items = data.filter((value) => value.position === this.props.position);
+
+  //     this.setState({
+  //       menus: items[0].items,
+  //       loading: false,
+  //     });
+  //   });
+    
+  // }
 
   render() {
+    // const {page} = this.state;
+    console.log(this.props, 'render');
+    return (
+      <div></div>
+    );
     return (
       <ul className={`navigation ${cssList}`}>
         {this.state.loading ? 'Loading Menu...' : null}
